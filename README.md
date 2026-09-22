@@ -1,25 +1,178 @@
 # 🤖 Telegram Todo Bot
 
-یک ربات تلگرام برای مدیریت کارهای روزانه
+[![Tests](https://github.com/yasinsaffayy-max/telegram-todo-bot/actions/workflows/tests.yml/badge.svg)](https://github.com/yasinsaffayy-max/telegram-todo-bot/actions)
+![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![Telegram](https://img.shields.io/badge/telegram-bot-26A5E4?logo=telegram)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+ربات تلگرام مدیریت کارها با پایتون و SQLite
 
 ## ✨ امکانات
+
 - ➕ افزودن کار با ارسال متن
-- 📋 نمایش لیست کارها
+- 📋 نمایش لیست کارها با دکمه‌های inline
 - ✅ علامت زدن به عنوان انجام‌شده
-- 🗑 حذف کار
-- 💾 ذخیره‌سازی در SQLite
+- 🗑 حذف کارها
+- 🧹 پاک کردن همه کارها با `/clear`
+- 🗄 ذخیره‌سازی دائمی در SQLite
+- 🧪 ۳۲ تست خودکار با pytest (۹۵٪ coverage)
+- ⚙️ CI/CD با GitHub Actions
 
 ## 🛠 تکنولوژی‌ها
-- Python 3.10
+
+- Python 3.10+
 - python-telegram-bot
 - SQLite
+- pytest
 
 ## 🚀 اجرا
-\`\`\`bash
-pip install -r requirements.txt
-echo "BOT_TOKEN=your_token_here" > .env
-python bot.py
-\`\`\`
 
-## 👤 نویسنده
-یاسین صفایی — [GitHub](https://github.com/yasinsaffayy-max)
+```bash
+# 1. نصب پکیج‌ها
+pip install -r requirements.txt
+
+# 2. ساخت فایل .env
+echo "BOT_TOKEN=توکن_رباتت_رو_اینجا_بذار" > .env
+
+# 3. اجرا
+python bot.pycat > README.md << 'EOF'
+# 🔗 Sho.rt — کوتاه‌کننده لینک با آمار کامل
+
+[![Tests](https://github.com/yasinsaffayy-max/flask-shortener/actions/workflows/tests.yml/badge.svg)](https://github.com/yasinsaffayy-max/flask-shortener/actions)
+![Coverage](https://img.shields.io/badge/coverage-94%25-brightgreen)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![Flask](https://img.shields.io/badge/flask-3.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+یه سرویس کوتاه‌کننده لینک حرفه‌ای با Flask — مثل bit.ly ولی ساده‌تر و با نمودارهای زیبا.
+
+## ✨ امکانات
+
+- 🔗 **کوتاه‌سازی لینک** — هم برای کاربر لاگین‌کرده، هم مهمان
+- 📊 **آمار کامل** — کلیک، دستگاه، مرورگر، IP، زمان
+- 📈 **نمودار ۷ روز اخیر** با Chart.js
+- 📱 **QR Code خودکار** برای هر لینک
+- 🔒 **محدودیت نرخ** — مهمان: ۵ لینک/روز، API: ۱۰ درخواست/روز
+- ⏰ **انقضای لینک** — تعیین تاریخ انقضا
+- 🔀 **فعال/غیرفعال کردن لینک** بدون حذف
+- 🌙 **حالت تاریک**
+- 🚀 **REST API** برای ساخت لینک و آمار
+- 👤 **احراز هویت** با Flask-Login
+- 📱 **کاملاً رسپانسیو**
+
+## 🧪 تست‌ها
+
+این پروژه دارای **۵۱ تست خودکار** با پوشش **۹۴٪** است.
+
+```bash
+pytest --cov=app --cov-report=term-missing
+```
+
+🛠 تکنولوژی‌ها
+
+بخش تکنولوژی
+Backend Flask 3, SQLAlchemy, Flask-Login, Flask-WTF
+Database SQLite
+Frontend Bootstrap 5 RTL, Chart.js, Vazirmatn
+Analytics user-agents (تشخیص دستگاه)
+QR Code qrcode + Pillow
+Testing pytest, pytest-flask, pytest-cov
+CI/CD GitHub Actions
+
+🚀 نصب و اجرا
+
+```bash
+# 1. کلون پروژه
+git clone https://github.com/yasinsaffayy-max/flask-shortener.git
+cd flask-shortener
+
+# 2. ساخت virtualenv
+python -m venv venv
+source venv/bin/activate  # ویندوز: venv\Scripts\activate
+
+# 3. نصب پکیج‌ها
+pip install -r requirements.txt
+
+# 4. ساخت فایل .env
+cp .env.example .env
+# مقدار SECRET_KEY رو ویرایش کن
+
+# 5. ساخت دیتابیس
+python init_db.py
+
+# 6. اجرا
+python run.py
+```
+
+مرورگر: http://127.0.0.1:5000
+
+🔐 ورود ادمین
+
+· Username: admin
+· Password: admin123
+
+⚠️ بعد از اولین ورود، رمز رو تغییر بده!
+
+📡 API
+
+ساخت لینک کوتاه
+
+```bash
+curl -X POST http://127.0.0.1:5000/api/shorten \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://example.com/very/long/url", "title": "اختیاری"}'
+```
+
+پاسخ:
+
+```json
+{
+  "short_code": "aB3xY9",
+  "short_url": "http://127.0.0.1:5000/aB3xY9",
+  "original_url": "https://example.com/very/long/url",
+  "created_at": "2026-09-20T10:30:00"
+}
+```
+
+آمار یک لینک
+
+```bash
+curl http://127.0.0.1:5000/api/stats/aB3xY9
+```
+
+چک سلامت
+
+```bash
+curl http://127.0.0.1:5000/api/health
+```
+
+📁 ساختار پروژه
+
+```
+flask-shortener/
+├── app/
+│   ├── __init__.py
+│   ├── models.py            # User, Link, Click
+│   ├── forms.py
+│   ├── decorators.py
+│   ├── routes/
+│   │   ├── main.py          # صفحه اصلی + redirect
+│   │   ├── auth.py          # ثبت‌نام/ورود
+│   │   ├── link.py          # ساخت لینک + آمار
+│   │   └── api.py           # REST API
+│   ├── templates/
+│   └── static/
+│       └── qrcodes/         # QR Codeها
+├── tests/                   # ۵۱ تست pytest
+├── .github/workflows/       # GitHub Actions
+├── config.py
+├── run.py
+├── init_db.py
+├── pytest.ini
+└── requirements.txt
+```
+
+📝 لایسنس
+
+MIT

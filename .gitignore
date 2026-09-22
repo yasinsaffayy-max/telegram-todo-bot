@@ -1,5 +1,23 @@
+# Python
+venv/
 __pycache__/
 *.pyc
+*.pyo
+
+# Environment
 .env
+.env.local
+
+# Database
 *.db
-venv/
+tasks.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.idea/
+.vscode/
+.DS_Store

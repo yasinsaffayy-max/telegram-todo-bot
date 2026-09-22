@@ -1,11 +1,21 @@
+import os
 import sqlite3
 from datetime import datetime
 
-DB_NAME = "tasks.db"
+
+def get_db_name():
+    """مسیر دیتابیس — قابل تغییر با env برای تست"""
+    return os.environ.get("DB_NAME", "tasks.db")
+
+
+def get_connection():
+    """اتصال به دیتابیس"""
+    return sqlite3.connect(get_db_name())
+
 
 def init_db():
     """ساخت جدول‌ها در اولین اجرا"""
-    conn = sqlite3.connect(DB_NAME)
+    conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tasks (
@@ -19,8 +29,9 @@ def init_db():
     conn.commit()
     conn.close()
 
+
 def add_task(user_id: int, title: str) -> int:
-    conn = sqlite3.connect(DB_NAME)
+    conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
         "INSERT INTO tasks (user_id, title) VALUES (?, ?)",
@@ -31,8 +42,9 @@ def add_task(user_id: int, title: str) -> int:
     conn.close()
     return task_id
 
+
 def get_tasks(user_id: int):
-    conn = sqlite3.connect(DB_NAME)
+    conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
         "SELECT id, title, done FROM tasks WHERE user_id = ? ORDER BY id DESC",
@@ -42,8 +54,9 @@ def get_tasks(user_id: int):
     conn.close()
     return tasks
 
+
 def toggle_task(user_id: int, task_id: int):
-    conn = sqlite3.connect(DB_NAME)
+    conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
         "UPDATE tasks SET done = 1 - done WHERE id = ? AND user_id = ?",
@@ -52,8 +65,9 @@ def toggle_task(user_id: int, task_id: int):
     conn.commit()
     conn.close()
 
+
 def delete_task(user_id: int, task_id: int):
-    conn = sqlite3.connect(DB_NAME)
+    conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
         "DELETE FROM tasks WHERE id = ? AND user_id = ?",
